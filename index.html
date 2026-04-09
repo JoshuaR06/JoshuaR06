@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lighthouse-DID Hub – Legal</title>
+  <style>
+    :root{
+      --bg1:#7c3aed;
+      --bg2:#2563eb;
+      --bg3:#06b6d4;
+      --text:#eef2ff;
+      --muted:rgba(238,242,255,.78);
+      --panel:rgba(255,255,255,.16);
+      --panel-strong:rgba(255,255,255,.22);
+      --border:rgba(255,255,255,.24);
+      --shadow:0 18px 60px rgba(15, 23, 42, .28);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.18), transparent 22%),
+        radial-gradient(circle at 85% 15%, rgba(255,255,255,.16), transparent 20%),
+        radial-gradient(circle at 80% 80%, rgba(255,255,255,.12), transparent 24%),
+        linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 48%, var(--bg3) 100%);
+      min-height:100vh;
+    }
+
+    .blur-orb{
+      position:fixed;
+      inset:auto;
+      width:320px;
+      height:320px;
+      border-radius:50%;
+      filter:blur(60px);
+      opacity:.22;
+      pointer-events:none;
+      z-index:0;
+    }
+    .orb-1{top:80px; left:-60px; background:#c4b5fd;}
+    .orb-2{top:35%; right:-80px; background:#93c5fd;}
+    .orb-3{bottom:-40px; left:25%; background:#67e8f9;}
+
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width:1120px;
+      margin:0 auto;
+      padding:32px 18px 60px;
+    }
+
+    .glass{
+      background:var(--panel);
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
+      border-radius:var(--radius);
+    }
+
+    .hero{
+      padding:34px 28px 24px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,0));
+      pointer-events:none;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.22);
+      background:rgba(255,255,255,.12);
+      color:var(--muted);
+      font-size:13px;
+      letter-spacing:.02em;
+    }
+
+    h1{
+      font-size:clamp(2rem, 4vw, 3.4rem);
+      line-height:1.02;
+      margin:16px 0 12px;
+      letter-spacing:-.03em;
+    }
+
+    .subtitle{
+      max-width:760px;
+      font-size:1.02rem;
+      color:var(--muted);
+      line-height:1.7;
+      margin:0 0 22px;
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .meta-card{
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.18);
+    }
+    .meta-label{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:rgba(238,242,255,.72);
+      margin-bottom:6px;
+    }
+    .meta-value{
+      font-size:1rem;
+      font-weight:600;
+      color:#fff;
+      word-break:break-word;
+    }
+
+    .nav{
+      margin:18px 0 24px;
+      padding:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      position:sticky;
+      top:14px;
+      z-index:5;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.1);
+      font-size:.95rem;
+      transition:.2s ease;
+    }
+    .nav a:hover{
+      background:rgba(255,255,255,.18);
+      transform:translateY(-1px);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:20px;
+    }
+
+    .section{
+      padding:26px 24px;
+    }
+
+    .section h2{
+      font-size:1.55rem;
+      margin:0 0 16px;
+      letter-spacing:-.02em;
+    }
+
+    .section h3{
+      font-size:1.03rem;
+      margin:22px 0 8px;
+      color:#fff;
+    }
+
+    p, li{
+      color:var(--muted);
+      line-height:1.75;
+      font-size:.98rem;
+    }
+
+    ul{
+      margin:10px 0 0 0;
+      padding-left:20px;
+    }
+
+    .callout{
+      margin:16px 0;
+      padding:16px 18px;
+      border-radius:18px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .callout::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:4px;
+      background:linear-gradient(180deg, #c4b5fd, #67e8f9);
+    }
+    .callout strong{color:#fff}
+
+    .footer{
+      margin-top:22px;
+      padding:18px 20px;
+      text-align:center;
+      color:rgba(238,242,255,.7);
+      font-size:.92rem;
+    }
+
+    a.inline{
+      color:#fff;
+    }
+
+    @media (min-width: 980px){
+      .grid{
+        grid-template-columns: 1fr 1fr;
+      }
+      .section.full{
+        grid-column:1 / -1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="blur-orb orb-1"></div>
+  <div class="blur-orb orb-2"></div>
+  <div class="blur-orb orb-3"></div>
+
+  <main class="wrap">
+    <header class="hero glass">
+      <span class="pill">Lighthouse-DID Hub • Legal Information</span>
+      <h1>Privacy-first legal pages with a glassmorphism UI.</h1>
+      <p class="subtitle">
+        This page includes the Privacy Policy, Terms of Service, and Mental Health Disclaimer for Lighthouse-DID Hub.
+        It is designed for a clean GitHub Pages deployment and reflects a local-only data model with no accounts,
+        no analytics, and adult-only use.
+      </p>
+
+      <div class="meta">
+        <div class="meta-card">
+          <div class="meta-label">Developer</div>
+          <div class="meta-value">Joshua Reid</div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Contact</div>
+          <div class="meta-value"><a class="inline" href="mailto:josh@jink.io">josh@jink.io</a></div>
+        </div>
+        <div class="meta-card">
+          <div class="meta-label">Effective Date</div>
+          <div class="meta-value">April 9, 2026</div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="nav glass" aria-label="Legal page navigation">
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Service</a>
+      <a href="#disclaimer">Mental Health Disclaimer</a>
+    </nav>
+
+    <section class="grid">
+      <article id="privacy" class="section glass">
+        <h2>Privacy Policy</h2>
+        <p>
+          Lighthouse-DID Hub (“the App”) is developed and operated by Joshua Reid (“we,” “our,” or “us”).
+          This Privacy Policy explains how information is handled when you use the App.
+        </p>
+
+        <h3>1. Information We Collect</h3>
+        <p>We do <strong>not collect, store, or transmit personal data</strong>.</p>
+        <ul>
+          <li>The App does not require account creation.</li>
+          <li>The App does not collect names, email addresses, or identifiers.</li>
+          <li>The App does not track location.</li>
+          <li>The App does not use analytics or advertising trackers.</li>
+          <li>The App does not store user entries on external servers.</li>
+        </ul>
+        <p>
+          All information entered into the App, including journal entries, schedules, or system-related notes,
+          is stored locally on the user’s device only.
+        </p>
+
+        <h3>2. How Information Is Used</h3>
+        <p>
+          Because we do not collect user data, we do not sell, rent, share, analyze, or monetize that data.
+          Information entered into the App is used only for the App’s functionality on the user’s own device.
+        </p>
+
+        <h3>3. Data Storage and Security</h3>
+        <p>
+          All data remains under the user’s control on their device. We do not have access to this data and cannot
+          retrieve, recover, or delete it on the user’s behalf.
+        </p>
+
+        <h3>4. Optional Sharing Features</h3>
+        <p>
+          If the App includes optional features that allow a user to share selected information with another person,
+          sharing occurs only when the user intentionally initiates it. We do not store or retain shared content.
+        </p>
+
+        <h3>5. Third-Party Services</h3>
+        <p>
+          The App does not integrate third-party analytics, advertising, or tracking services.
+        </p>
+
+        <h3>6. Children’s Privacy</h3>
+        <p>
+          Lighthouse-DID Hub is intended for adults only and is not directed to children under 13.
+        </p>
+
+        <h3>7. Changes to This Policy</h3>
+        <p>
+          This Privacy Policy may be updated from time to time. Any updates will appear on this page with a revised
+          effective date.
+        </p>
+      </article>
+
+      <article id="terms" class="section glass">
+        <h2>Terms of Service</h2>
+        <p>
+          By downloading, accessing, or using Lighthouse-DID Hub, you agree to these Terms of Service.
+          If you do not agree, do not use the App.
+        </p>
+
+        <h3>1. Personal Use</h3>
+        <p>
+          The App is provided for personal, lawful use. You agree not to misuse the App, interfere with its operation,
+          or use it in a way that violates applicable laws or regulations.
+        </p>
+
+        <h3>2. No Medical or Clinical Advice</h3>
+        <p>
+          Lighthouse-DID Hub is a self-management and organizational tool. It does not provide medical, psychiatric,
+          psychological, therapeutic, or crisis-response services.
+        </p>
+
+        <div class="callout">
+          <strong>The App is not a substitute for professional mental health care, diagnosis, treatment, or emergency support.</strong>
+        </div>
+
+        <h3>3. User Responsibility</h3>
+        <p>
+          You are solely responsible for how you use the App, the accuracy of what you enter, and any decisions you
+          make based on the App’s content or features.
+        </p>
+
+        <h3>4. Data Responsibility</h3>
+        <p>
+          Because your information stays on your device, you are responsible for maintaining access to your device,
+          securing it, and creating backups if you want to preserve your data.
+        </p>
+
+        <h3>5. Limitation of Liability</h3>
+        <p>
+          To the fullest extent permitted by law, Lighthouse-DID Hub and Joshua Reid are not liable for any indirect,
+          incidental, special, consequential, or exemplary damages, including loss of data, loss of access, interruption
+          of use, or decisions made in reliance on the App.
+        </p>
+
+        <h3>6. Changes and Termination</h3>
+        <p>
+          We may modify or discontinue the App or these terms at any time. You may stop using the App at any time.
+        </p>
+      </article>
+
+      <article id="disclaimer" class="section glass full">
+        <h2>Mental Health Disclaimer</h2>
+        <p>
+          Lighthouse-DID Hub is designed as a supportive self-management tool. It is not a medical device,
+          diagnostic tool, therapy platform, or crisis intervention service.
+        </p>
+
+        <div class="callout">
+          <strong>This App does not diagnose Dissociative Identity Disorder or any other mental health condition, and it should not be used as a replacement for licensed care.</strong>
+        </div>
+
+        <h3>Important Limitations</h3>
+        <ul>
+          <li>The App does not provide diagnosis, treatment recommendations, or emergency assessment.</li>
+          <li>The App does not replace a licensed physician, therapist, psychologist, psychiatrist, or crisis professional.</li>
+          <li>The App should not be relied upon in emergencies or situations involving immediate risk of harm.</li>
+        </ul>
+
+        <h3>Crisis and Emergency Situations</h3>
+        <p>
+          If you or another person may be in immediate danger, call emergency services right away. If you are experiencing
+          a mental health crisis, contact a licensed mental health professional or an appropriate crisis support service
+          in your area immediately.
+        </p>
+
+        <h3>User Responsibility</h3>
+        <p>
+          By using the App, you acknowledge that you are responsible for your own health decisions and for seeking qualified
+          professional support when needed.
+        </p>
+      </article>
+    </section>
+
+    <footer class="footer glass">
+      © 2026 Joshua Reid — Lighthouse-DID Hub
+    </footer>
+  </main>
+</body>
+</html>
