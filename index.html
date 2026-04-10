@@ -3,40 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joshua Reid | Indie Developer Hub</title>
-  <meta name="description" content="Personal hub for Joshua Reid, indie developer and creator. Explore Lighthouse and future apps/projects." />
+  <title>Joshua Reid | Developer Hub</title>
+  <meta name="description" content="Personal developer hub for Joshua Reid. Explore Lighthouse, privacy details, and future practical tools." />
   <style>
     :root {
-      --bg: #0f172a;
-      --bg-soft: #1e293b;
-      --card: #111827;
-      --text: #e2e8f0;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-2: #a78bfa;
-      --border: rgba(148, 163, 184, 0.25);
+      --bg: #0b1220;
+      --bg-soft: #111c31;
+      --panel: rgba(15, 23, 42, 0.72);
+      --card: rgba(15, 23, 42, 0.56);
+      --text: #e5ecf7;
+      --muted: #9dafc8;
+      --accent: #67d3f3;
+      --accent-2: #b7a3ff;
+      --border: rgba(157, 175, 200, 0.26);
       --max: 1080px;
       --radius: 18px;
-      --shadow: 0 18px 40px rgba(2, 6, 23, 0.5);
+      --shadow: 0 20px 40px rgba(2, 8, 23, 0.45);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 15% 5%, rgba(56, 189, 248, 0.18), transparent 32%),
-        radial-gradient(circle at 90% 10%, rgba(167, 139, 250, 0.18), transparent 28%),
+        radial-gradient(circle at 14% 6%, rgba(103, 211, 243, 0.15), transparent 35%),
+        radial-gradient(circle at 85% 12%, rgba(183, 163, 255, 0.15), transparent 30%),
         linear-gradient(160deg, var(--bg), var(--bg-soft));
-      min-height: 100vh;
     }
     .container {
       max-width: var(--max);
       margin: 0 auto;
-      padding: 20px 16px 48px;
+      padding: 20px 16px 44px;
     }
     .panel {
-      background: rgba(15, 23, 42, 0.74);
+      background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -46,44 +47,67 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
       padding: 14px 18px;
       margin-bottom: 18px;
-      gap: 10px;
       position: sticky;
       top: 10px;
+      z-index: 10;
     }
-    .brand { font-weight: 700; letter-spacing: -0.03em; }
-    .nav { display: flex; gap: 10px; flex-wrap: wrap; }
+    .brand {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      font-size: 1rem;
+    }
+    .nav { display: flex; flex-wrap: wrap; gap: 10px; }
     .nav a, .btn {
       color: var(--text);
       text-decoration: none;
       border: 1px solid var(--border);
-      background: rgba(30, 41, 59, 0.7);
+      background: rgba(30, 41, 59, 0.62);
       padding: 10px 14px;
       border-radius: 999px;
-      font-size: 0.95rem;
-      transition: .2s ease;
+      font-size: 0.94rem;
+      min-height: 40px;
       display: inline-flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      transition: border-color .2s ease, transform .2s ease, background .2s ease;
     }
-    .nav a:hover, .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .nav a:hover, .btn:hover {
+      border-color: var(--accent);
+      background: rgba(30, 41, 59, 0.85);
+      transform: translateY(-1px);
+    }
     .hero {
       padding: 34px 28px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: #c9d8ee;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
     }
     h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 4vw, 3.5rem);
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3.35rem);
       letter-spacing: -0.04em;
-      line-height: 1.05;
+      line-height: 1.06;
+      max-width: 14ch;
     }
-    p { color: var(--muted); line-height: 1.7; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+      letter-spacing: -0.03em;
+    }
+    p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .hero p { max-width: 70ch; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
     .btn.primary {
       background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      color: #061022;
       border: none;
-      color: #020617;
       font-weight: 700;
     }
     .section {
@@ -91,6 +115,7 @@
       margin-bottom: 16px;
     }
     .grid {
+      margin-top: 16px;
       display: grid;
       gap: 14px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -99,9 +124,14 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 18px;
-      background: rgba(15, 23, 42, 0.55);
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 220px;
     }
-    .card h3 { margin: 0 0 8px; }
+    .card h3 { margin: 0; font-size: 1.08rem; }
+    .card .actions { margin-top: auto; }
     .footer {
       text-align: center;
       padding: 16px;
@@ -109,6 +139,7 @@
       color: var(--muted);
     }
     .inline { color: var(--text); }
+
     @media (max-width: 760px) {
       .topbar { flex-direction: column; align-items: flex-start; }
       .hero, .section { padding: 20px; }
@@ -130,37 +161,42 @@
     </header>
 
     <section class="hero panel">
-      <p>Indie developer & creator</p>
-      <h1>Building calm, practical tools for everyday life.</h1>
+      <p class="eyebrow">Indie developer • practical tools • privacy-first mindset</p>
+      <h1>Building simple tools that feel calm, clear, and useful.</h1>
       <p>
-        Welcome to my personal hub. This is the central home for my projects, experiments, and app updates.
-        Lighthouse is the first featured app, with more projects to follow.
+        I’m Joshua Reid, an indie developer focused on thoughtful apps for personal organization.
+        This site is the central hub for my work, product updates, and project pages.
       </p>
       <div class="actions">
-        <a class="btn primary" href="lighthouse/">View Lighthouse</a>
-        <a class="btn" href="lighthouse/privacy/">View Privacy Policy</a>
+        <a class="btn primary" href="lighthouse/">Explore Lighthouse</a>
+        <a class="btn" href="lighthouse/privacy/">Read Privacy Policy</a>
       </div>
     </section>
 
     <section class="section panel" id="projects">
-      <h2>Featured app</h2>
+      <h2>Featured project</h2>
+      <p>Lighthouse is my current app. Future projects will be added here in the same clear, lightweight format.</p>
       <div class="grid">
         <article class="card">
-          <h3>Lighthouse-DID Hub</h3>
+          <h3>Lighthouse</h3>
           <p>
-            A private, local-first self-management app for journaling, routines, and personal organization.
-            Built with a calm interface and privacy-first defaults.
+            A local-first organization app for people managing dissociative identity disorder (DID)
+            or similarly complex internal organization needs.
+          </p>
+          <p>
+            It helps keep journals, routines, mood notes, calendar items, and medication details in one place.
           </p>
           <div class="actions">
-            <a class="btn" href="lighthouse/">Open app page</a>
-            <a class="btn" href="lighthouse/privacy/">Read privacy policy</a>
+            <a class="btn" href="lighthouse/">View App Page</a>
+            <a class="btn" href="lighthouse/privacy/">Privacy Policy</a>
           </div>
         </article>
+
         <article class="card">
-          <h3>Future projects</h3>
+          <h3>What this hub is for</h3>
+          <p>One place to quickly understand each project: what it does, who it is for, and how privacy is handled.</p>
           <p>
-            This hub is structured to grow with future apps and tools. New project pages can be added as dedicated
-            folders while keeping navigation simple and consistent.
+            The goal is straightforward documentation and stable navigation, without extra noise.
           </p>
         </article>
       </div>
