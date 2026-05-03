@@ -139,6 +139,36 @@
       color: var(--muted);
     }
     .inline { color: var(--text); }
+    .contact-card {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: var(--card);
+    }
+    .contact-actions { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .contact-reveal { margin-top: 12px; }
+    .contact-email {
+      margin: 0 0 10px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #d6f4ff;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .btn:focus-visible, .nav a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
 
     @media (max-width: 760px) {
       .topbar { flex-direction: column; align-items: flex-start; }
@@ -201,10 +231,58 @@
         </article>
       </div>
     </section>
+    <section class="section panel" id="contact">
+      <h2>Contact</h2>
+      <p>Want to get in touch? Use the contact option below.</p>
+      <div class="contact-card" data-contact-card>
+        <button class="btn" type="button" data-reveal-email aria-expanded="false" aria-controls="home-contact-reveal">
+          Email Me
+        </button>
+        <div class="contact-reveal" id="home-contact-reveal" hidden>
+          <p class="contact-email" data-email-text aria-live="polite"></p>
+          <div class="contact-actions">
+            <a class="btn" data-email-link href="#">Open Email App</a>
+            <button class="btn" type="button" data-copy-email>Copy Email</button>
+          </div>
+          <p class="visually-hidden" data-copy-status aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
 
     <footer class="footer panel">
-      © 2026 Joshua Reid · <a class="inline" href="mailto:josh@jreid.me">josh@jreid.me</a>
+      © 2026 Joshua Reid
     </footer>
   </main>
+  <script>
+    // Email is assembled client-side to reduce basic scraping, but this is not complete spam protection.
+    (() => {
+      const user = "josh";
+      const domain = "jreid";
+      const tld = "me";
+      const email = `${user}@${domain}.${tld}`;
+      const card = document.querySelector("[data-contact-card]");
+      if (!card) return;
+      const revealBtn = card.querySelector("[data-reveal-email]");
+      const revealArea = card.querySelector(".contact-reveal");
+      const emailText = card.querySelector("[data-email-text]");
+      const emailLink = card.querySelector("[data-email-link]");
+      const copyBtn = card.querySelector("[data-copy-email]");
+      const copyStatus = card.querySelector("[data-copy-status]");
+      revealBtn?.addEventListener("click", () => {
+        revealArea.hidden = false;
+        revealBtn.setAttribute("aria-expanded", "true");
+        emailText.textContent = email;
+        emailLink.href = `mailto:${email}`;
+      });
+      copyBtn?.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+          copyStatus.textContent = "Email copied to clipboard.";
+        } catch {
+          copyStatus.textContent = "Clipboard unavailable. Please copy the email manually.";
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
